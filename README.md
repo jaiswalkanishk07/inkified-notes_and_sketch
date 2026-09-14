@@ -1,7 +1,166 @@
-<!-- ╔═══════════════════════════════════════════════════════════════════════════╗
-     ║  Inkify — Notes & Sketch PWA                                            ║
-     ║  Offline-first · Enterprise-ready · $0 hosting · fm0058TU-optimized     ║
-     ╚═══════════════════════════════════════════════════════════════════════════╝ -->
+# Inkify — Notes & Sketch PWA
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6.svg?logo=typescript)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-18-61dafb.svg?logo=react)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-6-646cff.svg?logo=vite)](https://vitejs.dev/)
+[![PWA](https://img.shields.io/badge/PWA-installable-5a0fc8.svg?logo=pwa)](https://web.dev/progressive-web-apps/)
+[![Firebase](https://img.shields.io/badge/Firebase-Spark-free-ffca28.svg?logo=firebase)](https://firebase.google.com/)
+
+Offline-first notes & sketch PWA with Google login. Built with React, Vite, Tailwind, Firebase.
+
+## Features
+
+- Google Sign-In
+- Rich text notes (TipTap editor)
+- Freehand sketching (canvas + perfect-freehand)
+- Offline-first (IndexedDB via Dexie, syncs when online)
+- Installable PWA
+- Dark / light theme
+
+## Tech Stack
+
+| Layer | Tech |
+|---|---|
+| Frontend | Vite 6 + React 18 + TypeScript |
+| Styling | Tailwind CSS v4 |
+| PWA | vite-plugin-pwa + Workbox |
+| Notes | TipTap (ProseMirror) |
+| Sketch | Custom canvas + perfect-freehand |
+| Local DB | Dexie.js (IndexedDB) |
+| State | Zustand |
+| Cloud | Firebase (Auth, Firestore, Storage, Hosting) |
+| Validation | Zod |
+
+## Architecture
+
+```mermaid
+flowchart TB
+    subgraph Client
+        PWA["PWA Shell"]
+        Auth["Auth"]
+        Notes["Notes"]
+        Sketch["Sketch"]
+        Store["Zustand"]
+        Dexie["Dexie IndexedDB"]
+        Sync["Sync Engine"]
+    end
+
+    subgraph Firebase
+        FAuth["Auth"]
+        Firestore["Firestore"]
+        Storage["Storage"]
+    end
+
+    PWA --> Auth & Notes & Sketch
+    Auth --> Store
+    Notes --> Store
+    Sketch --> Store
+    Store <--> Dexie
+    Dexie <--> Sync
+    Auth --> FAuth
+    Sync --> Firestore
+    Sketch --> Storage
+```
+
+## Data Flow
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant UI
+    participant Store
+    participant Dexie as Dexie (IndexedDB)
+    participant Sync
+    participant FS as Firestore
+
+    User->>UI: Type in editor
+    UI->>Store: updateNote()
+    Store->>Dexie: db.notes.put()
+    Dexie-->>Store: ok
+    Store-->>UI: re-render
+    Store->>Sync: enqueue()
+    Sync->>FS: notes.doc().set()
+    FS-->>Sync: ok
+    Sync->>Dexie: syncQueue.delete()
+```
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js ≥ 20
+- npm ≥ 10
+- A Firebase project (free Spark tier)
+
+### Setup
+
+```bash
+git clone git@github.com:jaiswalkanishk07/inkified.git
+cd inkified
+npm install
+cp .env.example .env.local
+# Fill in your Firebase keys in .env.local
+npm run dev
+```
+
+### Firebase Setup
+
+1. Create a project at [Firebase Console](https://console.firebase.google.com/)
+2. Enable **Authentication → Google** sign-in
+3. Enable **Cloud Firestore** and **Storage**
+4. Copy your web app config into `.env.local`
+
+### Environment Variables
+
+```env
+VITE_FIREBASE_API_KEY=...
+VITE_FIREBASE_AUTH_DOMAIN=...
+VITE_FIREBASE_PROJECT_ID=...
+VITE_FIREBASE_STORAGE_BUCKET=...
+VITE_FIREBASE_MESSAGING_SENDER_ID=...
+VITE_FIREBASE_APP_ID=...
+VITE_FIREBASE_MEASUREMENT_ID=...
+VITE_RECAPTCHA_V3_SITE_KEY=...
+```
+
+## Scripts
+
+```bash
+npm run dev          # Dev server
+npm run build        # Production build
+npm run preview      # Preview build
+npm run lint         # Lint
+npm run typecheck    # Type check
+npm run test         # Unit tests
+npm run test:e2e     # E2E tests
+```
+
+## Project Structure
+
+```
+src/
+├── app/              # App shell, router, entry point
+├── features/
+│   ├── auth/         # Google login, protected routes
+│   ├── notes/        # Notes list & editor
+│   └── sketch/       # Canvas sketching
+├── core/
+│   ├── firebase/     # Firebase config
+│   ├── db/           # Dexie schema
+│   └── sync/         # Offline sync engine
+├── shared/
+│   ├── components/   # Button, Modal, Toast, etc.
+│   ├── hooks/        # Shared hooks
+│   ├── styles/       # Tailwind entry
+│   └── utils/        # Helpers
+└── types/            # Shared domain types
+```
+
+## License
+
+MIT
+
 
 <div align="center">
 

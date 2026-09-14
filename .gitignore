@@ -1,7 +1,81 @@
-# ─── Inkify gitignore ─────────────────────────────────────────────────────────
+# Inkify gitignore
+
 # Local working plan (kept out of version control by design)
 IMPLEMENTATION_PLAN.md
 _plan/
+
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn.lock
+yarn-error.log*
+pnpm-lock.yaml
+.yarn/*
+.pnpm-store
+
+# Build output
+dist/
+dist-ssr/
+build/
+*.local
+stats.html
+stats.json
+
+# PWA generated service worker / workbox
+public/sw.js
+public/workbox-*.js
+dev-dist/
+
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+.env.development
+.env.test
+.env.production
+!.env.example
+firebase-debug.log
+firebase-debug.*.log
+firebase-export-*
+
+# IDE / editor
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+*~
+
+# OS / misc
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+*.log
+*.bak
+*.tmp
+*.temp
+.cache/
+.turbo/
+.vercel
+.netlify
+
+# Test artifacts
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+playwright/.cache/
+
+# Debug / misc
+node-report*.txt
+*.heapsnapshot
+crash.txt
+
 
 # ─── Dependencies ──────────────────────────────────────────────────────────────
 node_modules/
