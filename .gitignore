@@ -1,11 +1,11 @@
-# ─── Inkify gitignore ─────────────────────────────────────────────────────────
+# Inkify gitignore
+
 # Local working plan (kept out of version control by design)
 IMPLEMENTATION_PLAN.md
 _plan/
 
-# ─── Dependencies ──────────────────────────────────────────────────────────────
+# Dependencies
 node_modules/
-package-lock.json
 npm-debug.log*
 yarn.lock
 yarn-error.log*
@@ -13,7 +13,7 @@ pnpm-lock.yaml
 .yarn/*
 .pnpm-store
 
-# ─── Build output ──────────────────────────────────────────────────────────────
+# Build output
 dist/
 dist-ssr/
 build/
@@ -21,30 +21,23 @@ build/
 stats.html
 stats.json
 
-# ─── PWA generated service worker / workbox ────────────────────────────────────
+# PWA generated service worker / workbox
 public/sw.js
 public/workbox-*.js
-public/robots.txt.generated
 dev-dist/
 
-# ─── Environment / secrets ─────────────────────────────────────────────────────
+# Environment / secrets
 .env
 .env.local
 .env.*.local
 .env.development
 .env.test
 .env.production
-.env.example.bak
-!.env.example          # keep example committed
-firebase-debug.log
-firebase-debug.*.log
-.firebaserc.default
-firebase-export-*
+!.env.example
 
-# ─── IDE / editor ──────────────────────────────────────────────────────────────
+# IDE / editor
 .vscode/*
 !.vscode/extensions.json
-!.vscode/settings.json.example
 .idea/
 *.suo
 *.ntvs*
@@ -54,114 +47,28 @@ firebase-export-*
 *.swp
 *~
 
-# ─── OS / misc ─────────────────────────────────────────────────────────────────
+# OS / misc
 .DS_Store
 Thumbs.db
 ehthumbs.db
 Desktop.ini
-$RECYCLE.BIN/
 *.log
 *.bak
 *.tmp
 *.temp
-*.cache
 .cache/
 .turbo/
 .vercel
 .netlify
 
-# ─── Test artifacts ────────────────────────────────────────────────────────────
+# Test artifacts
 coverage/
 .nyc_output/
 playwright-report/
 test-results/
 playwright/.cache/
-*.spec.ts.js.snap.bak
-vitest.config.ts.timestamp-*
 
-# ─── Debug / misc ──────────────────────────────────────────────────────────────
-node-report*.txt
-*.heapsnapshot
-crash.txt
-
-
-# ─── Dependencies ──────────────────────────────────────────────────────────────
-node_modules/
-package-lock.json
-npm-debug.log*
-yarn.lock
-yarn-error.log*
-pnpm-lock.yaml
-.yarn/*
-.pnpm-store
-
-# ─── Build output ──────────────────────────────────────────────────────────────
-dist/
-dist-ssr/
-build/
-*.local
-stats.html
-stats.json
-
-# ─── PWA generated service worker / workbox ────────────────────────────────────
-public/sw.js
-public/workbox-*.js
-public/robots.txt.generated
-dev-dist/
-
-# ─── Environment / secrets ─────────────────────────────────────────────────────
-.env
-.env.local
-.env.*.local
-.env.development
-.env.test
-.env.production
-.env.example.bak
-!.env.example          # keep example committed
-firebase-debug.log
-firebase-debug.*.log
-.firebaserc.default
-firebase-export-*
-
-# ─── IDE / editor ──────────────────────────────────────────────────────────────
-.vscode/*
-!.vscode/extensions.json
-!.vscode/settings.json.example
-.idea/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-*.swp
-*~
-
-# ─── OS / misc ─────────────────────────────────────────────────────────────────
-.DS_Store
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-$RECYCLE.BIN/
-*.log
-*.bak
-*.tmp
-*.temp
-*.cache
-.cache/
-.turbo/
-.vercel
-.netlify
-
-# ─── Test artifacts ────────────────────────────────────────────────────────────
-coverage/
-.nyc_output/
-playwright-report/
-test-results/
-playwright/.cache/
-*.spec.ts.js.snap.bak
-vitest.config.ts.timestamp-*
-
-# ─── Debug / misc ──────────────────────────────────────────────────────────────
+# Debug / misc
 node-report*.txt
 *.heapsnapshot
 crash.txt
