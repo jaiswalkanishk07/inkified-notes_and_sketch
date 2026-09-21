@@ -14,6 +14,7 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
+      includeAssets: ['favicon-32.png', 'icons/*.png', 'screenshots/*.png'],
       manifest: {
         name: 'Inkify',
         short_name: 'Inkify',
@@ -25,7 +26,29 @@ export default defineConfig({
         scope: '/',
         start_url: '/',
         categories: ['productivity', 'utilities'],
-        // Icons, screenshots and shortcuts are added in Stage 1 with real assets
+        icons: [
+          { src: 'icons/icon-192.png', sizes: '192x192', type: 'image/png' },
+          { src: 'icons/icon-512.png', sizes: '512x512', type: 'image/png' },
+          { src: 'icons/icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+        ],
+        screenshots: [
+          {
+            src: 'screenshots/hero-wide.png',
+            sizes: '1280x720',
+            type: 'image/png',
+            form_factor: 'wide',
+          },
+          {
+            src: 'screenshots/hero-narrow.png',
+            sizes: '390x844',
+            type: 'image/png',
+            form_factor: 'narrow',
+          },
+        ],
+        shortcuts: [
+          { name: 'New Note', short_name: 'Note', url: '/notes/new' },
+          { name: 'New Sketch', short_name: 'Sketch', url: '/sketch/new' },
+        ],
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,webp}'],
@@ -47,6 +70,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom'],
+          tiptap: ['@tiptap/react', '@tiptap/core', '@tiptap/starter-kit', '@tiptap/extension-list', '@tiptap/markdown'],
         },
       },
     },

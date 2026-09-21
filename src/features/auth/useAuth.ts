@@ -1,13 +1,27 @@
 import { useEffect, useState } from 'react';
 import type { User } from '@/types';
 
-// Local-only auth placeholder — Firebase removed for now.
-// Will be replaced with a proper login provider in a later stage.
+// Local-first mode: no cloud auth yet. A stable local guest identity lets the
+// app work in the browser with everything persisted in Dexie/IndexedDB.
+// Swap for a real provider when a backend is introduced.
+const GUEST_USER: User = {
+  uid: 'local-guest',
+  email: 'guest@local',
+  displayName: 'Guest',
+  photoURL: null,
+  createdAt: new Date().toISOString(),
+  lastLoginAt: new Date().toISOString(),
+  settings: { theme: 'system', fontSize: 16 },
+};
+
 export function useAuth() {
-  const [user] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(GUEST_USER);
   const [loading] = useState(false);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    // Future: subscribe to real auth provider here.
+    setUser(GUEST_USER);
+  }, []);
 
   return { user, loading };
 }
