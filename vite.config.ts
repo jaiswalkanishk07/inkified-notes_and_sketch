@@ -70,6 +70,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom'],
+          tiptap: ['@tiptap/react', '@tiptap/core', '@tiptap/starter-kit', '@tiptap/extension-list', '@tiptap/markdown'],
         },
       },
     },
